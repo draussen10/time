@@ -9,11 +9,11 @@ const timetable = {
 	},
 	'Чт': {
 		startTime: '00:00',
-		endTime: '24:00'
+		endTime: '23:59'
 	},
 	'Пт': {
 		startTime: '00:00',
-		endTime: '24:00'
+		endTime: '23:59'
 	}
 }
 
