@@ -12,7 +12,7 @@ const fromNumToDate = (num) => {
 	return  hours + ':' + minutes;
 }
 
-const fillArrayTime = (startTime, endTime) => {
+const fillTimes = (startTime, endTime) => {
 	const length = calculateDifferent(startTime, endTime) - 1
 	let times = Array(length).fill(0);
 
@@ -27,43 +27,53 @@ const fillArrayTime = (startTime, endTime) => {
 	return times
 }
 
-function checkDate(day) {
+function checkAndFillDate() {
 	const time = new Date().getHours() + ":" + new Date().getMinutes()
 
 	const date = new Date().toLocaleString('ru-RU', {  weekday: 'short' })
 
 	for(key in timetable) {
-		if (key.toLowerCase() == day.toLowerCase()) {
-			if(key.toLowerCase() === date.toLowerCase()){
-				if (fromDateToNum(time) > fromDateToNum(timetable[key].startTime) && fromDateToNum(time) < fromDateToNum(timetable[key].endTime)) {
-					return fillArrayTime(time, timetable[key].endTime)
-				} else if (fromDateToNum(time) < fromDateToNum(timetable[key].startTime)) {
-					return fillArrayTime(timetable[key].startTime, timetable[key].endTime)
-				} else if (fromDateToNum(time) > fromDateToNum(timetable[key].endTime)) {
-					return []
-				}
-			}
-			else {
-				return fillArrayTime(timetable[key].startTime, timetable[key].endTime)
+		if (key.toLowerCase() === date.toLowerCase()) {
+			if (fromDateToNum(time) > fromDateToNum(timetable[key].startTime) && fromDateToNum(time) < fromDateToNum(timetable[key].endTime)) {
+				return fillTimes(time, timetable[key].endTime)
+			} else if (fromDateToNum(time) < fromDateToNum(timetable[key].startTime)) {
+				return fillTimes(timetable[key].startTime, timetable[key].endTime)
+			} else if (fromDateToNum(time) > fromDateToNum(timetable[key].endTime)) {
+				return []
 			}
 		}
 	}
+	return []
 }
 
 let lastTimes = ''
 
 setInterval(() => {
+	let times = checkAndFillDate() || []
 
-	let times = checkDate(document.querySelector('.ddl-select').value) || []
+
 
 	if(JSON.stringify(times) !== JSON.stringify(lastTimes)) {
-		lastTimes = times
-		document.querySelector('.buttons').innerHTML = '<a  class="button selected">ASAP</a>'
-		times.map(time => {
-			document.querySelector('.buttons').innerHTML += `<a  class="button">${time}</a>`
-		})
+		if(JSON.stringify(times) !== '[]') {
+			lastTimes = times
+			const lastTime = document.querySelector('.button.selected').innerHTML
 
-		initButtons()
+			document.querySelector('.buttons').innerHTML = `<a  class="button">ASAP</a>`
+			times.map(time => {
+				document.querySelector('.buttons').innerHTML += `<a  class="button${time === lastTime ? ' selected' : ''}">${time}</a>`
+			})
+
+			if (document.querySelector('.button.selected') === null) {
+				document.querySelector(".buttons > a:nth-child(1)").classList.add('selected')
+			}
+
+			initButtons()
+
+			document.querySelector('.noTime').style.display = 'none'
+		} else {
+			document.querySelector('.buttons').innerHTML = ''
+			document.querySelector('.noTime').style.display = 'block'
+		}
 	}
 
 }, 1000)
