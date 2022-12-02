@@ -17,4 +17,6 @@ const timetable = {
 	}
 }
 
+const freedays = ['12/3/2022']
+
 const timeDiff = 15

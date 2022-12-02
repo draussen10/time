@@ -50,10 +50,18 @@ const fillTimes = (startTime, endTime, gap = 0) => {
 function checkAndFillDate() {
 	const time = new Date().toLocaleTimeString('en-US',  {hour: 'numeric', minute: 'numeric'})
 
-	const date = new Date().toLocaleString('ru-RU', {  weekday: 'short' })
+	const dayOfWeek = new Date().toLocaleString('ru-Ru', {  weekday: 'short' })
+
+	const day =  new Date().toLocaleString('en-US', { year: "numeric", month: "numeric", day: "numeric" })
+
+	for(freeday of freedays) {
+		if(freeday == day) {
+			return []
+		}
+	}
 
 	for(key in timetable) {
-		if (key.toLowerCase() === date.toLowerCase()) {
+		if (key.toLowerCase() === dayOfWeek.toLowerCase()) {
 
 			const startGap = fromStrToDate(fromDateToStr(fromStrToDate(timetable[key].startTime) - fromStrToDate('00:' + timeDiff + ' AM')))
 
