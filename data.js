@@ -1,19 +1,19 @@
 const timetable = {
 	'Пн': {
-		startTime: '11:00',
-		endTime: '15:00'
+		startTime: '11:00 AM',
+		endTime: '3:00 PM'
 	},
 	'Вт': {
-		startTime: '11:00',
-		endTime: '15:00'
+		startTime: '11:00 AM',
+		endTime: '3:00 PM'
 	},
 	'Чт': {
-		startTime: '00:00',
-		endTime: '24:00'
+		startTime: '11:00 AM',
+		endTime: '3:00 PM'
 	},
 	'Пт': {
-		startTime: '00:00',
-		endTime: '24:00'
+		startTime: '11:00 AM',
+		endTime: '11:00 PM'
 	}
 }
 
