@@ -1,17 +1,17 @@
 const timetable = {
-	'Пн': {
+	'Mon': {
 		startTime: '11:00 AM',
 		endTime: '3:00 PM'
 	},
-	'Вт': {
+	'Tue': {
 		startTime: '11:00 AM',
 		endTime: '3:00 PM'
 	},
-	'Чт': {
+	'Thu': {
 		startTime: '11:00 AM',
 		endTime: '3:00 PM'
 	},
-	'Пт': {
+	'Fri': {
 		startTime: '11:00 AM',
 		endTime: '11:00 PM'
 	}

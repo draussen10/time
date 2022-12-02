@@ -50,7 +50,7 @@ const fillTimes = (startTime, endTime, gap = 0) => {
 function checkAndFillDate() {
 	const time = new Date().toLocaleTimeString('en-US',  {hour: 'numeric', minute: 'numeric'})
 
-	const dayOfWeek = new Date().toLocaleString('ru-Ru', {  weekday: 'short' })
+	const dayOfWeek = new Date().toLocaleString('en-US', {  weekday: 'short' })
 
 	const day =  new Date().toLocaleString('en-US', { year: "numeric", month: "numeric", day: "numeric" })
 
